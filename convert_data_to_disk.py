@@ -200,22 +200,14 @@ def split_srand_label(cv, input_list, label_list_file):
 
     for i in range(3,14):
         f = open('/gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/check_rmsd/sb_s' + str(i) + '67.test', 'r')
-        # f_train = open('/gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/check_rmsd/label_train/sb_s' + str(i) + '67.test', 'w')
-        # f_test = open('/gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/check_rmsd/label_test/sb_s' + str(i) + '67.test', 'w')
-        
-        # f = open('/home/mdl/hzj5142/AtomNet/cross_validation/check_rmsd/sb_s' + str(i) + '67.test', 'r')
-        # f_train = open('/home/mdl/hzj5142/AtomNet/cross_validation/cv' + str(cv) + '/train_sb_s' + str(i) + '67.test', 'w')
-        # f_test = open('/home/mdl/hzj5142/AtomNet/cross_validation/cv' + str(cv) + '/test_sb_s' + str(i) + '67.test', 'w')
         f_train = open(label_list_file + '/train_sb_s' + str(i) + '67.test', 'w')
         f_test = open(label_list_file + '/test_sb_s' + str(i) + '67.test', 'w')
 
 
 
         rec_list = []
-        # ff = open('/home/mdl/hzj5142/AtomNet/cross_validation/pdbbind_3875_list', 'r')
         ff = open('/gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/pdbbind_3875_list', 'r')
         for line in ff:
-            # rec_list.append(line.strip()+'.pdb')
             rec_list.append(line.strip())
         ff.close()
 
@@ -260,40 +252,33 @@ if __name__ == "__main__":
     #resolution = int(sys.argv[6])
 
     cv = int(sys.argv[1])
-    # input_list = '/gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/AtomNet/tmp_data/pdbbind_'
-    #input_list = '/gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/medusa/run_medusa/pdbbind_'
-    # label_list_file = '/gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/check_rmsd/label_'
+    # the RMSDs for all poses should be stored under this dir
+    # e.g., /gpfs/group/mtk2/cyberstar/hzj5142/GNN/GNN/DGNN/data/pdbbind/train_sb_s367.test and
+    # e.g., /gpfs/group/mtk2/cyberstar/hzj5142/GNN/GNN/DGNN/data/pdbbind/test_sb_s367.test
     label_list_file = '/gpfs/group/mtk2/cyberstar/hzj5142/GNN/GNN/DGNN/data/pdbbind' # + str(cv) #+ '/train_sb_s'
     
+    # the output pose should be stored under this dir i
+    # e.g., /gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/medusa/pdbbind_output_s367/3g19.pdb
     pdbbind_dir = '/gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/medusa/pdbbind_output_s'
-    # pdbbind_dir = '/home/mdl/hzj5142/AtomNet/medusa/pdbbind_output_s'
-    
+
+    # The pdb file downloaded from the website
+    # e.g., /gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/pdbbind/3g19/3g19.rec.pdb    and
+    # e.g., /gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/pdbbind/3g19/3g19.lig.mol2
     groundtruth_dir = '/gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/pdbbind/'
-    # groundtruth_dir = '/home/mdl/hzj5142/AtomNet/medusa/pdbbind'
-    #output_dir = '/gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/AtomNet/tmp_data/pdbbind_rmsd_srand2_30'
-    #resolution = 30
 
     iteration = int(sys.argv[2])
-    #iteration = 0
     resolution = iteration
-    #output_dir = '/gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/AtomNet/tmp_data/pdbbind_rmsd_srand2_acc_'+str(resolution)
-    # cv = int(sys.argv[1])
 
-    # output_dir = '/home/mdl/hzj5142/AtomNet/cross_validation/cv' + str(cv) + '/pdbbind_rmsd_srand'
-    # input_list = '/home/mdl/hzj5142/AtomNet/cross_validation/cv' + str(cv) + '/pdb_list_'
     output_file = sys.argv[3]
+    # this is the output dir.
     output_dir = label_list_file + '/' + output_file
-    # output_dir = label_list_file + '/pdbbind_rmsd_srand2'
     input_list = label_list_file + '/pdb_list_'
 
-    # split_srand_label(cv, input_list, label_list_file)
 
-    # srand_data_load_save(input_list, label_list_file, pdbbind_dir, groundtruth_dir, output_dir, cv, resolution, iteration)
 
     start = int(sys.argv[4])
     end = int(sys.argv[5])
     thread_num = int(sys.argv[6])
     srand_data_load_save_gcn(input_list, label_list_file, pdbbind_dir, groundtruth_dir, output_dir, cv, resolution, iteration, start, end, thread_num = thread_num)
 
-    # load_and_save_dataset(input_list, label_list_file, pdbbind_dir, groundtruth_dir, output_dir, resolution)
 
