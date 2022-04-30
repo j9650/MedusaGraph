@@ -1,0 +1,71 @@
+REMARK  8 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: C1_1  and  C21_21 
+REMARK    2  A    between atoms: C2_2  and  O22_22 
+REMARK    3  A    between atoms: C10_10  and  C17_17 
+REMARK    4  A    between atoms: C11_11  and  O16_16 
+REMARK    5  A    between atoms: C13_13  and  O15_15 
+REMARK       I    between atoms: C17_17  and  N18_18 
+REMARK    6  A    between atoms: N18_18  and  C26_26 
+REMARK    7  A    between atoms: C26_26  and  C27_27 
+REMARK    8  A    between atoms: C28_28  and  C37_37 
+ROOT
+ATOM      1  C1  KRC d   1      15.774  50.830  64.617  0.00  0.00     0.090 C 
+ATOM      2  C2  KRC d   1      16.163  51.372  63.467  0.00  0.00     0.085 C 
+ATOM      3  C3  KRC d   1      15.989  50.636  62.193  0.00  0.00     0.072 C 
+ATOM      4  C4  KRC d   1      15.207  49.554  62.139  0.00  0.00     0.077 C 
+ATOM      5  C5  KRC d   1      14.978  48.711  63.399  0.00  0.00     0.103 C 
+ATOM      6  C6  KRC d   1      14.881  49.645  64.616  0.00  0.00     0.185 C 
+ATOM      7  O7  KRC d   1      14.469  48.924  61.222  0.00  0.00    -0.312 OA
+ATOM      8  C8  KRC d   1      13.455  48.158  61.736  0.00  0.00     0.104 A 
+ATOM      9  C9  KRC d   1      13.681  47.970  63.116  0.00  0.00     0.033 A 
+ATOM     10  C10 KRC d   1      12.341  47.592  61.133  0.00  0.00     0.099 A 
+ATOM     11  C11 KRC d   1      11.442  46.846  61.893  0.00  0.00     0.089 A 
+ATOM     12  C12 KRC d   1      11.663  46.665  63.253  0.00  0.00     0.075 A 
+ATOM     13  C13 KRC d   1      12.774  47.223  63.864  0.00  0.00     0.079 A 
+ATOM     14  O14 KRC d   1      14.155  49.408  65.578  0.00  0.00    -0.290 OA
+ATOM     15  C19 KRC d   1      16.141  47.740  63.590  0.00  0.00     0.037 C 
+ENDROOT
+BRANCH  10  16
+ATOM     16  C17 KRC d   1      12.104  47.779  59.694  0.00  0.00     0.257 C 
+ATOM     17  N18 KRC d   1      10.836  47.920  59.271  0.00  0.00    -0.352 N 
+ATOM     18  H4  KRC d   1      10.085  47.907  59.931  0.00  0.00     0.163 HD
+ATOM     19  O20 KRC d   1      13.045  47.790  58.909  0.00  0.00    -0.267 OA
+BRANCH  17  20
+ATOM     20  C26 KRC d   1      10.555  48.091  57.854  0.00  0.00     0.162 C 
+BRANCH  20  21
+ATOM     21  C27 KRC d   1       9.119  48.503  57.671  0.00  0.00    -0.023 A 
+ATOM     22  C28 KRC d   1       8.789  49.826  57.335  0.00  0.00    -0.050 A 
+ATOM     23  C29 KRC d   1       7.449  50.198  57.172  0.00  0.00     0.008 A 
+ATOM     24  C30 KRC d   1       6.431  49.254  57.342  0.00  0.00     0.013 A 
+ATOM     25  C31 KRC d   1       6.749  47.953  57.672  0.00  0.00    -0.025 A 
+ATOM     26  C32 KRC d   1       8.092  47.569  57.838  0.00  0.00    -0.018 A 
+ATOM     27  C33 KRC d   1       5.731  47.034  57.837  0.00  0.00     0.012 A 
+ATOM     28  C36 KRC d   1       8.397  46.255  58.169  0.00  0.00     0.013 A 
+ATOM     29  C35 KRC d   1       7.367  45.319  58.337  0.00  0.00     0.001 A 
+ATOM     30  C34 KRC d   1       6.034  45.708  58.171  0.00  0.00     0.001 A 
+BRANCH  22  31
+ATOM     31  C37 KRC d   1       9.875  50.847  57.150  0.00  0.00     0.035 C 
+ATOM     32  C38 KRC d   1      10.399  50.858  55.713  0.00  0.00     0.010 C 
+ENDBRANCH  22  31
+ENDBRANCH  20  21
+ENDBRANCH  17  20
+ENDBRANCH  10  16
+BRANCH  11  33
+ATOM     33  O16 KRC d   1      10.334  46.280  61.297  0.00  0.00    -0.355 OA
+ATOM     34  C25 KRC d   1       9.182  45.733  61.897  0.00  0.00     0.210 C 
+ENDBRANCH  11  33
+BRANCH  13  35
+ATOM     35  O15 KRC d   1      12.980  47.032  65.213  0.00  0.00    -0.360 OA
+ATOM     36  H3  KRC d   1      13.778  47.475  65.476  0.00  0.00     0.217 HD
+ENDBRANCH  13  35
+BRANCH   2  37
+ATOM     37  O22 KRC d   1      16.740  52.598  63.456  0.00  0.00    -0.360 OA
+ATOM     38  H8  KRC d   1      17.619  52.530  63.103  0.00  0.00     0.217 HD
+ENDBRANCH   2  37
+BRANCH   1  39
+ATOM     39  C21 KRC d   1      16.249  51.383  65.901  0.00  0.00     0.162 C 
+ATOM     40  C23 KRC d   1      17.751  51.509  66.172  0.00  0.00     0.097 C 
+ATOM     41  O24 KRC d   1      15.443  51.739  66.748  0.00  0.00    -0.293 OA
+ENDBRANCH   1  39
+TORSDOF 8

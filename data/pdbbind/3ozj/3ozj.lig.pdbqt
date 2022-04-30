@@ -1,0 +1,33 @@
+REMARK  2 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: OAK_11  and  CAM_13 
+REMARK    2  A    between atoms: CAT_20  and  OAK_11 
+ROOT
+ATOM      1  CAA BGV d   1      13.042  16.039  17.380  0.00  0.00     0.025 C 
+ATOM      2  CAC BGV d   1      18.499  13.117  16.097  0.00  0.00     0.011 C 
+ATOM      3  CAD BGV d   1      15.619  11.788  18.283  0.00  0.00     0.027 C 
+ATOM      4  OAF BGV d   1      16.349  12.408  20.910  0.00  0.00    -0.292 OA
+ATOM      5  OAG BGV d   1      12.414  15.002  14.710  0.00  0.00    -0.260 OA
+ATOM      6  CAH BGV d   1      18.028  13.301  19.872  0.00  0.00     0.047 A 
+ATOM      7  CAI BGV d   1      18.233  13.874  18.729  0.00  0.00    -0.017 A 
+ATOM      8  CAJ BGV d   1      16.041  13.261  15.699  0.00  0.00     0.038 C 
+ATOM      9  OAL BGV d   1      14.095  13.623  15.119  0.00  0.00    -0.311 OA
+ATOM     10  CAN BGV d   1      13.646  15.034  16.680  0.00  0.00     0.017 C 
+ATOM     11  CAO BGV d   1      16.790  12.976  19.962  0.00  0.00     0.160 A 
+ATOM     12  CAP BGV d   1      13.292  14.587  15.435  0.00  0.00     0.289 C 
+ATOM     13  CAQ BGV d   1      17.131  12.953  16.689  0.00  0.00    -0.007 C 
+ATOM     14  CAR BGV d   1      14.695  13.147  16.263  0.00  0.00     0.143 C 
+ATOM     15  CAS BGV d   1      16.969  13.829  17.873  0.00  0.00     0.030 A 
+ATOM     16  CAT BGV d   1      14.778  14.008  18.729  0.00  0.00     0.159 C 
+ATOM     17  CAU BGV d   1      14.821  14.292  17.185  0.00  0.00     0.084 C 
+ATOM     18  CAV BGV d   1      16.005  13.174  18.746  0.00  0.00     0.055 A 
+ENDROOT
+BRANCH  16  19
+ATOM     19  OAK BGV d   1      14.955  15.108  19.613  0.00  0.00    -0.314 OA
+BRANCH  19  20
+ATOM     20  CAM BGV d   1      14.490  15.161  20.820  0.00  0.00     0.255 C 
+ATOM     21  CAB BGV d   1      15.434  15.470  21.904  0.00  0.00     0.126 C 
+ATOM     22  OAE BGV d   1      13.321  15.071  21.041  0.00  0.00    -0.266 OA
+ENDBRANCH  19  20
+ENDBRANCH  16  19
+TORSDOF 2

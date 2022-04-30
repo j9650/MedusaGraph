@@ -1,0 +1,55 @@
+REMARK  9 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: CAJ_2  and  CAL_3 
+REMARK    2  A    between atoms: CAL_3  and  CAM_4 
+REMARK    3  A    between atoms: CAM_4  and  CAN_5 
+REMARK    4  A    between atoms: CAN_5  and  CAS_6 
+REMARK    5  A    between atoms: CAV_7  and  CAQ_8 
+REMARK    6  A    between atoms: CAR_11  and  OAG_12 
+REMARK    7  A    between atoms: CAT_14  and  OAO_15 
+REMARK    8  A    between atoms: CAU_17  and  CAK_18 
+REMARK    9  A    between atoms: CAK_18  and  CAH_19 
+ROOT
+ATOM      1  CAS YFD d   1     -16.120  22.697 -48.348  0.00  0.00    -0.036 A 
+ATOM      2  CAV YFD d   1     -17.426  22.185 -48.192  0.00  0.00     0.080 A 
+ATOM      3  CAR YFD d   1     -17.607  20.870 -47.733  0.00  0.00     0.092 A 
+ATOM      4  CAI YFD d   1     -15.065  21.864 -48.005  0.00  0.00     0.045 A 
+ATOM      5  CAT YFD d   1     -15.263  20.562 -47.548  0.00  0.00     0.078 A 
+ATOM      6  CAU YFD d   1     -16.545  20.025 -47.391  0.00  0.00     0.013 A 
+ENDROOT
+BRANCH   1   7
+ATOM      7  CAN YFD d   1     -15.696  24.103 -48.815  0.00  0.00     0.040 C 
+BRANCH   7   8
+ATOM      8  CAM YFD d   1     -15.967  24.409 -50.292  0.00  0.00     0.005 C 
+BRANCH   8   9
+ATOM      9  CAL YFD d   1     -14.980  25.457 -50.858  0.00  0.00    -0.000 C 
+BRANCH   9  10
+ATOM     10  CAJ YFD d   1     -15.078  26.820 -50.164  0.00  0.00    -0.005 C 
+ATOM     11  CAA YFD d   1     -14.132  27.825 -50.834  0.00  0.00     0.005 C 
+ENDBRANCH   9  10
+ENDBRANCH   8   9
+ENDBRANCH   7   8
+ENDBRANCH   1   7
+BRANCH   2  12
+ATOM     12  CAQ YFD d   1     -18.698  23.013 -48.523  0.00  0.00     0.212 C 
+ATOM     13  OAF YFD d   1     -19.815  22.437 -48.450  0.00  0.00    -0.644 OA
+ATOM     14  OAE YFD d   1     -18.564  24.224 -48.824  0.00  0.00    -0.644 OA
+ENDBRANCH   2  12
+BRANCH   3  15
+ATOM     15  OAG YFD d   1     -18.874  20.393 -47.605  0.00  0.00    -0.359 OA
+ATOM     16  H12 YFD d   1     -19.307  20.416 -48.450  0.00  0.00     0.217 HD
+ENDBRANCH   3  15
+BRANCH   5  17
+ATOM     17  OAO YFD d   1     -14.164  19.825 -47.253  0.00  0.00    -0.355 OA
+ATOM     18  CAB YFD d   1     -13.496  19.451 -48.454  0.00  0.00     0.210 C 
+ENDBRANCH   5  17
+BRANCH   6  19
+ATOM     19  CAK YFD d   1     -16.831  18.590 -46.874  0.00  0.00     0.072 C 
+BRANCH  19  20
+ATOM     20  CAH YFD d   1     -16.223  18.333 -45.627  0.00  0.00    -0.020 C 
+ATOM     21  CAP YFD d   1     -16.770  17.986 -44.375  0.00  0.00    -0.091 C 
+ATOM     22  CAD YFD d   1     -15.835  17.703 -43.171  0.00  0.00     0.042 C 
+ATOM     23  CAC YFD d   1     -18.303  17.863 -44.152  0.00  0.00     0.042 C 
+ENDBRANCH  19  20
+ENDBRANCH   6  19
+TORSDOF 9

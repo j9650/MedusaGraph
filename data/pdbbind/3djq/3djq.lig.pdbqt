@@ -1,0 +1,57 @@
+REMARK  8 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: N1_1  and  C1'_9 
+REMARK    2  A    between atoms: C2'_10  and  O2'_11 
+REMARK    3  A    between atoms: C3'_12  and  O3'_15 
+REMARK    4  A    between atoms: C4'_13  and  C5'_16 
+REMARK    5  A    between atoms: C5'_16  and  O5'_17 
+REMARK    6  A    between atoms: O5'_17  and  PA_18 
+REMARK    7  A    between atoms: PA_18  and  O3A_21 
+REMARK    8  A    between atoms: O3A_21  and  PB_22 
+ROOT
+ATOM      1  C1' UDP d   1      29.876  39.114   8.101  0.00  0.00     0.263 C 
+ATOM      2  C2' UDP d   1      31.320  38.896   8.543  0.00  0.00     0.198 C 
+ATOM      3  C3' UDP d   1      31.576  39.960   9.598  0.00  0.00     0.182 C 
+ATOM      4  C4' UDP d   1      30.205  40.513   9.952  0.00  0.00     0.180 C 
+ATOM      5  O4' UDP d   1      29.305  40.104   8.935  0.00  0.00    -0.353 OA
+ENDROOT
+BRANCH   4   6
+ATOM      6  C5' UDP d   1      30.234  42.033  10.123  0.00  0.00     0.216 C 
+BRANCH   6   7
+ATOM      7  O5' UDP d   1      29.614  42.713   9.050  0.00  0.00    -0.287 OA
+BRANCH   7   8
+ATOM      8  PA  UDP d   1      30.271  44.045   8.412  0.00  0.00     0.418 P 
+ATOM      9  O1A UDP d   1      30.103  44.057   6.940  0.00  0.00    -0.624 OA
+ATOM     10  O2A UDP d   1      31.713  44.154   8.748  0.00  0.00    -0.624 OA
+BRANCH   8  11
+ATOM     11  O3A UDP d   1      29.413  45.264   9.020  0.00  0.00    -0.173 OA
+BRANCH  11  12
+ATOM     12  PB  UDP d   1      29.421  45.641  10.587  0.00  0.00     0.431 P 
+ATOM     13  O1B UDP d   1      28.539  44.688  11.302  0.00  0.00    -0.616 OA
+ATOM     14  O2B UDP d   1      28.894  47.018  10.732  0.00  0.00    -0.616 OA
+ATOM     15  O3B UDP d   1      30.791  45.562  11.142  0.00  0.00    -0.616 OA
+ENDBRANCH  11  12
+ENDBRANCH   8  11
+ENDBRANCH   7   8
+ENDBRANCH   6   7
+ENDBRANCH   4   6
+BRANCH   3  16
+ATOM     16  O3' UDP d   1      32.186  39.428  10.751  0.00  0.00    -0.390 OA
+ATOM     17  H9  UDP d   1      31.645  38.730  11.101  0.00  0.00     0.210 HD
+ENDBRANCH   3  16
+BRANCH   2  18
+ATOM     18  O2' UDP d   1      31.459  37.590   9.071  0.00  0.00    -0.388 OA
+ATOM     19  H6  UDP d   1      32.358  37.455   9.346  0.00  0.00     0.210 HD
+ENDBRANCH   2  18
+BRANCH   1  20
+ATOM     20  N1  UDP d   1      29.744  39.515   6.675  0.00  0.00    -0.280 N 
+ATOM     21  C2  UDP d   1      29.560  38.546   5.701  0.00  0.00     0.331 A 
+ATOM     22  N3  UDP d   1      29.421  38.907   4.372  0.00  0.00    -0.275 N 
+ATOM     23  O2  UDP d   1      29.533  37.360   6.010  0.00  0.00    -0.246 OA
+ATOM     24  C4  UDP d   1      29.461  40.231   3.989  0.00  0.00     0.250 A 
+ATOM     25  H1  UDP d   1      29.290  38.197   3.680  0.00  0.00     0.173 HD
+ATOM     26  C5  UDP d   1      29.635  41.212   4.965  0.00  0.00     0.092 A 
+ATOM     27  O4  UDP d   1      29.335  40.524   2.797  0.00  0.00    -0.268 OA
+ATOM     28  C6  UDP d   1      29.711  40.840   6.309  0.00  0.00     0.104 A 
+ENDBRANCH   1  20
+TORSDOF 8

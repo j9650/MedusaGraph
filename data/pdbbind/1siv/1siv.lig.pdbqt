@@ -1,0 +1,115 @@
+REMARK  19 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: N_1  and  CA1_2 
+REMARK    2  A    between atoms: CA1_2  and  C1_4 
+REMARK       I    between atoms: C1_4  and  N2_6 
+REMARK    3  A    between atoms: N2_6  and  CA2_7 
+REMARK    4  A    between atoms: CA2_7  and  C2_9 
+REMARK       I    between atoms: C2_9  and  N3_11 
+REMARK    5  A    between atoms: N3_11  and  CA3_12 
+REMARK    6  A    between atoms: CA3_12  and  C3_20 
+REMARK    7  A    between atoms: CA3_12  and  CB3_13 
+REMARK    8  A    between atoms: CB3_13  and  CG3_14 
+REMARK    9  A    between atoms: C3_20  and  CX4_22 
+REMARK   10  A    between atoms: C3_20  and  O3_21 
+REMARK   11  A    between atoms: CX4_22  and  CA4_23 
+REMARK   12  A    between atoms: CA4_23  and  C4_24 
+REMARK       I    between atoms: C4_24  and  N5_26 
+REMARK   13  A    between atoms: N5_26  and  CA5_27 
+REMARK   14  A    between atoms: CA5_27  and  C5_31 
+REMARK   15  A    between atoms: CA5_27  and  CB5_28 
+REMARK       I    between atoms: C5_31  and  N6_33 
+REMARK   16  A    between atoms: N6_33  and  CA6_34 
+REMARK   17  A    between atoms: CA6_34  and  C6_38 
+REMARK   18  A    between atoms: CA6_34  and  CB6_35 
+REMARK   19  A    between atoms: C6_38  and  OM6_40 
+ROOT
+ATOM      1  C3  GLI d   1       3.343  13.125  40.233  0.00  0.00     0.141 C 
+ENDROOT
+BRANCH   1   2
+ATOM      2  CA3 GLI d   1       4.452  13.011  39.177  0.00  0.00     0.117 C 
+BRANCH   2   3
+ATOM      3  N3  GLI d   1       4.215  13.948  38.082  0.00  0.00    -0.352 N 
+ATOM      4  C2  GLI d   1       3.760  13.525  36.914  0.00  0.00     0.240 C 
+ATOM      5  O2  GLI d   1       3.546  12.322  36.761  0.00  0.00    -0.271 OA
+ATOM      6  H13 GLI d   1       4.399  14.922  38.217  0.00  0.00     0.163 HD
+BRANCH   4   7
+ATOM      7  CA2 GLI d   1       3.522  14.546  35.801  0.00  0.00     0.172 C 
+ATOM      8  CB2 GLI d   1       2.205  14.311  35.105  0.00  0.00     0.042 C 
+BRANCH   7   9
+ATOM      9  N2  GLI d   1       4.553  14.387  34.822  0.00  0.00    -0.346 N 
+ATOM     10  C1  GLI d   1       5.100  15.411  34.260  0.00  0.00     0.248 C 
+ATOM     11  O1  GLI d   1       4.745  16.562  34.542  0.00  0.00    -0.271 OA
+ATOM     12  H8  GLI d   1       4.854  13.467  34.569  0.00  0.00     0.163 HD
+BRANCH  10  13
+ATOM     13  CA1 GLI d   1       6.178  15.157  33.219  0.00  0.00     0.270 C 
+ATOM     14  CB1 GLI d   1       7.468  14.826  33.945  0.00  0.00     0.050 C 
+BRANCH  13  15
+ATOM     15  N   GLI d   1       6.321  16.347  32.389  0.00  0.00    -0.067 N 
+ATOM     16  H1  GLI d   1       7.034  16.189  31.695  0.00  0.00     0.275 HD
+ATOM     17  H2  GLI d   1       6.583  17.130  32.967  0.00  0.00     0.275 HD
+ATOM     18  H3  GLI d   1       5.445  16.545  31.931  0.00  0.00     0.275 HD
+ENDBRANCH  13  15
+ENDBRANCH  10  13
+ENDBRANCH   7   9
+ENDBRANCH   4   7
+ENDBRANCH   2   3
+BRANCH   2  19
+ATOM     19  CB3 GLI d   1       5.822  13.315  39.752  0.00  0.00     0.066 C 
+BRANCH  19  20
+ATOM     20  CG3 GLI d   1       6.911  13.067  38.732  0.00  0.00    -0.056 A 
+ATOM     21  CD3 GLI d   1       7.268  11.774  38.425  0.00  0.00     0.007 A 
+ATOM     22  CE3 GLI d   1       8.269  11.582  37.501  0.00  0.00     0.001 A 
+ATOM     23  CZ3 GLI d   1       8.899  12.661  36.898  0.00  0.00     0.000 A 
+ATOM     24  CE3 GLI d   1       8.541  13.949  37.210  0.00  0.00     0.001 A 
+ATOM     25  CD3 GLI d   1       7.542  14.143  38.131  0.00  0.00     0.007 A 
+ENDBRANCH  19  20
+ENDBRANCH   2  19
+ENDBRANCH   1   2
+BRANCH   1  26
+ATOM     26  CX4 GLI d   1       1.969  12.755  39.784  0.00  0.00     0.043 C 
+BRANCH  26  27
+ATOM     27  CA4 GLI d   1       1.117  12.378  40.951  0.00  0.00     0.105 C 
+BRANCH  27  28
+ATOM     28  C4  GLI d   1       1.527  11.000  41.451  0.00  0.00     0.218 C 
+ATOM     29  N5  GLI d   1       1.524  10.780  42.758  0.00  0.00    -0.347 N 
+ATOM     30  H28 GLI d   1       1.278  11.506  43.400  0.00  0.00     0.163 HD
+ATOM     31  O4  GLI d   1       1.845  10.122  40.635  0.00  0.00    -0.274 OA
+BRANCH  29  32
+ATOM     32  CA5 GLI d   1       1.882   9.476  43.227  0.00  0.00     0.180 C 
+BRANCH  32  33
+ATOM     33  C5  GLI d   1       0.831   9.202  44.272  0.00  0.00     0.241 C 
+ATOM     34  N6  GLI d   1       0.187   8.063  44.137  0.00  0.00    -0.345 N 
+ATOM     35  H37 GLI d   1       0.408   7.476  43.358  0.00  0.00     0.163 HD
+ATOM     36  O5  GLI d   1       0.594   9.973  45.206  0.00  0.00    -0.271 OA
+BRANCH  34  37
+ATOM     37  CA6 GLI d   1      -0.835   7.623  45.077  0.00  0.00     0.187 C 
+BRANCH  37  38
+ATOM     38  C6  GLI d   1      -0.358   6.263  45.627  0.00  0.00     0.281 C 
+ATOM     39  O6  GLI d   1       0.661   5.687  45.229  0.00  0.00    -0.263 OA
+BRANCH  38  40
+ATOM     40  OM6 GLI d   1      -1.036   5.602  46.676  0.00  0.00    -0.325 OA
+ATOM     41  CM6 GLI d   1      -0.146   5.010  47.645  0.00  0.00     0.213 C 
+ENDBRANCH  38  40
+ENDBRANCH  37  38
+BRANCH  37  42
+ATOM     42  CB6 GLI d   1      -2.213   7.472  44.394  0.00  0.00     0.010 C 
+ATOM     43  CG6 GLI d   1      -2.156   6.412  43.315  0.00  0.00     0.012 C 
+ATOM     44  CG6 GLI d   1      -2.652   8.832  43.888  0.00  0.00     0.012 C 
+ENDBRANCH  37  42
+ENDBRANCH  34  37
+ENDBRANCH  32  33
+BRANCH  32  45
+ATOM     45  CB5 GLI d   1       3.272   9.343  43.919  0.00  0.00     0.009 C 
+ATOM     46  CG5 GLI d   1       4.425   9.805  43.038  0.00  0.00     0.012 C 
+ATOM     47  CG5 GLI d   1       3.512   7.866  44.202  0.00  0.00     0.012 C 
+ENDBRANCH  32  45
+ENDBRANCH  29  32
+ENDBRANCH  27  28
+ENDBRANCH  26  27
+ENDBRANCH   1  26
+BRANCH   1  48
+ATOM     48  O3  GLI d   1       3.227  14.460  40.705  0.00  0.00    -0.393 OA
+ATOM     49  H23 GLI d   1       4.075  14.762  41.010  0.00  0.00     0.210 HD
+ENDBRANCH   1  48
+TORSDOF 19

@@ -1,0 +1,46 @@
+REMARK  5 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: CA_4  and  C_1 
+REMARK    2  A    between atoms: N_2  and  CA_4 
+REMARK       I    between atoms: CAB_7  and  NAA_6 
+REMARK       I    between atoms: NAC_8  and  CAB_7 
+REMARK    3  A    between atoms: CAD_9  and  NAC_8 
+REMARK    4  A    between atoms: CAI_14  and  CAL_17 
+REMARK    5  A    between atoms: CAJ_15  and  OAK_16 
+ROOT
+ATOM      1  CAD GUS d   1      -1.883  13.119  16.989  0.00  0.00     0.050 A 
+ATOM      2  CAE GUS d   1      -0.996  12.324  17.708  0.00  0.00     0.033 A 
+ATOM      3  CAF GUS d   1      -0.394  12.819  18.859  0.00  0.00     0.039 A 
+ATOM      4  CAH GUS d   1      -2.165  14.403  17.437  0.00  0.00     0.045 A 
+ATOM      5  CAI GUS d   1      -1.566  14.902  18.585  0.00  0.00     0.016 A 
+ATOM      6  CAJ GUS d   1      -0.674  14.107  19.299  0.00  0.00     0.077 A 
+ENDROOT
+BRANCH   1   7
+ATOM      7  NAC GUS d   1      -2.452  12.696  15.863  0.00  0.00    -0.193 N 
+ATOM      8  CAB GUS d   1      -2.598  13.008  14.599  0.00  0.00     0.669 C 
+ATOM      9  NAA GUS d   1      -2.554  14.261  14.158  0.00  0.00    -0.235 N 
+ATOM     10  NAG GUS d   1      -2.808  12.019  13.733  0.00  0.00    -0.235 N 
+ATOM     11  H5  GUS d   1      -2.674  14.458  13.154  0.00  0.00     0.174 HD
+ATOM     12  H6  GUS d   1      -2.400  15.035  14.820  0.00  0.00     0.174 HD
+ATOM     13  H10 GUS d   1      -2.927  12.228  12.732  0.00  0.00     0.174 HD
+ATOM     14  H11 GUS d   1      -2.851  11.045  14.065  0.00  0.00     0.174 HD
+ATOM     15  H7  GUS d   1      -2.953  11.816  16.051  0.00  0.00     0.184 HD
+ENDBRANCH   1   7
+BRANCH   5  16
+ATOM     16  CAL GUS d   1      -1.848  16.209  18.975  0.00  0.00     0.125 C 
+ATOM     17  N   GUS d   1      -1.173  16.828  19.923  0.00  0.00    -0.285 NA
+BRANCH  17  18
+ATOM     18  CA  GUS d   1      -1.576  18.192  20.297  0.00  0.00     0.204 C 
+ATOM     19  CB  GUS d   1      -2.960  18.148  20.946  0.00  0.00     0.046 C 
+BRANCH  18  20
+ATOM     20  C   GUS d   1      -0.574  18.800  21.280  0.00  0.00     0.198 C 
+ATOM     21  O   GUS d   1      -0.844  19.935  21.730  0.00  0.00    -0.646 OA
+ATOM     22  OXT GUS d   1       0.439  18.122  21.559  0.00  0.00    -0.646 OA
+ENDBRANCH  18  20
+ENDBRANCH  17  18
+ENDBRANCH   5  16
+BRANCH   6  23
+ATOM     23  OAK GUS d   1      -0.068  14.585  20.419  0.00  0.00    -0.360 OA
+ATOM     24  H13 GUS d   1      -0.729  14.816  21.061  0.00  0.00     0.217 HD
+ENDBRANCH   6  23
+TORSDOF 5

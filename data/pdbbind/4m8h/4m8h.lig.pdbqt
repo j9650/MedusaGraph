@@ -1,0 +1,40 @@
+REMARK  4 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: C8_12  and  C9_13 
+REMARK    2  A    between atoms: C10_15  and  C11_16 
+REMARK    3  A    between atoms: C12_17  and  C13_18 
+REMARK    4  A    between atoms: C14_20  and  C15_21 
+ROOT
+ATOM      1  C2' R4M d   1      63.587  48.485  31.406  0.00  0.00     0.040 C 
+ATOM      2  C1' R4M d   1      63.468  48.289  32.922  0.00  0.00     0.014 C 
+ATOM      3  C18 R4M d   1      64.833  48.180  33.603  0.00  0.00     0.015 C 
+ATOM      4  C4' R4M d   1      64.677  47.894  35.096  0.00  0.00     0.015 C 
+ATOM      5  C5  R4M d   1      65.707  47.124  32.938  0.00  0.00    -0.044 A 
+ATOM      6  C4  R4M d   1      66.743  46.542  33.664  0.00  0.00     0.008 A 
+ATOM      7  C3  R4M d   1      67.571  45.592  33.091  0.00  0.00     0.001 A 
+ATOM      8  C2  R4M d   1      67.378  45.207  31.768  0.00  0.00     0.001 A 
+ATOM      9  C1  R4M d   1      66.358  45.790  31.029  0.00  0.00     0.012 A 
+ATOM     10  C6  R4M d   1      65.541  46.741  31.624  0.00  0.00    -0.023 A 
+ATOM     11  C7  R4M d   1      64.596  47.508  30.804  0.00  0.00    -0.047 C 
+ATOM     12  C8  R4M d   1      64.671  47.295  29.433  0.00  0.00     0.014 C 
+ENDROOT
+BRANCH  12  13
+ATOM     13  C9  R4M d   1      63.840  47.975  28.420  0.00  0.00    -0.061 C 
+ATOM     14  C19 R4M d   1      64.550  48.913  27.434  0.00  0.00     0.048 C 
+ATOM     15  C10 R4M d   1      62.463  47.847  28.309  0.00  0.00     0.007 C 
+BRANCH  15  16
+ATOM     16  C11 R4M d   1      61.572  47.027  29.141  0.00  0.00     0.001 C 
+ATOM     17  C12 R4M d   1      60.224  47.175  28.813  0.00  0.00     0.007 C 
+BRANCH  17  18
+ATOM     18  C13 R4M d   1      59.111  46.502  29.481  0.00  0.00    -0.056 C 
+ATOM     19  C20 R4M d   1      59.366  45.365  30.484  0.00  0.00     0.048 C 
+ATOM     20  C14 R4M d   1      57.831  46.946  29.154  0.00  0.00     0.091 C 
+BRANCH  20  21
+ATOM     21  C15 R4M d   1      56.631  46.356  29.764  0.00  0.00     0.199 C 
+ATOM     22  O1  R4M d   1      55.614  47.075  29.807  0.00  0.00    -0.644 OA
+ATOM     23  O2  R4M d   1      56.689  45.189  30.222  0.00  0.00    -0.644 OA
+ENDBRANCH  20  21
+ENDBRANCH  17  18
+ENDBRANCH  15  16
+ENDBRANCH  12  13
+TORSDOF 4

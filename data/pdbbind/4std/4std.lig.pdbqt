@@ -1,0 +1,40 @@
+REMARK  4 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: C1_1  and  C_7 
+REMARK    2  A    between atoms: C2_2  and  O2_18 
+REMARK       I    between atoms: C_7  and  N_16 
+REMARK    3  A    between atoms: N_16  and  CE1_8 
+REMARK    4  A    between atoms: CE1_8  and  C1'_10 
+ROOT
+ATOM      1  C   BFS d   1     105.697  90.668  29.115  0.00  0.00     0.255 C 
+ATOM      2  N   BFS d   1     104.584  89.910  29.018  0.00  0.00    -0.349 N 
+ATOM      3  O   BFS d   1     106.309  90.764  30.159  0.00  0.00    -0.268 OA
+ATOM      4  H12 BFS d   1     104.151  89.788  28.125  0.00  0.00     0.163 HD
+ENDROOT
+BRANCH   1   5
+ATOM      5  C1  BFS d   1     106.203  91.426  27.899  0.00  0.00     0.068 A 
+ATOM      6  C6  BFS d   1     105.458  91.415  26.710  0.00  0.00     0.062 A 
+ATOM      7  C5  BFS d   1     105.889  92.124  25.600  0.00  0.00     0.117 A 
+ATOM      8  C4  BFS d   1     107.073  92.844  25.653  0.00  0.00     0.045 A 
+ATOM      9  F5  BFS d   1     105.172  92.122  24.501  0.00  0.00    -0.206 F 
+ATOM     10  C3  BFS d   1     107.814  92.862  26.834  0.00  0.00     0.040 A 
+ATOM     11  C2  BFS d   1     107.392  92.135  27.949  0.00  0.00     0.081 A 
+BRANCH  11  12
+ATOM     12  O2  BFS d   1     108.142  92.118  29.097  0.00  0.00    -0.360 OA
+ATOM     13  H13 BFS d   1     108.921  92.648  28.973  0.00  0.00     0.217 HD
+ENDBRANCH  11  12
+ENDBRANCH   1   5
+BRANCH   2  14
+ATOM     14  CE1 BFS d   1     104.007  89.274  30.174  0.00  0.00     0.114 C 
+ATOM     15  CE2 BFS d   1     104.109  87.738  30.056  0.00  0.00     0.037 C 
+BRANCH  14  16
+ATOM     16  C1' BFS d   1     102.545  89.697  30.325  0.00  0.00    -0.036 A 
+ATOM     17  C6' BFS d   1     101.711  89.759  29.199  0.00  0.00     0.010 A 
+ATOM     18  C5' BFS d   1     100.387  90.190  29.325  0.00  0.00     0.019 A 
+ATOM     19  C4' BFS d   1      99.871  90.526  30.589  0.00  0.00     0.011 A 
+ATOM     20  C3' BFS d   1     100.685  90.456  31.721  0.00  0.00     0.019 A 
+ATOM     21 BR4  BFS d   1      98.123  91.054  30.764  0.00  0.00    -0.051 Br
+ATOM     22  C2' BFS d   1     102.017  90.038  31.593  0.00  0.00     0.010 A 
+ENDBRANCH  14  16
+ENDBRANCH   2  14
+TORSDOF 4

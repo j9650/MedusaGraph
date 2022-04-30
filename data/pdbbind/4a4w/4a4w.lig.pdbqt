@@ -1,0 +1,69 @@
+REMARK  11 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: CAH_4  and  CAP_5 
+REMARK    2  A    between atoms: CAP_5  and  CAR_6 
+REMARK    3  A    between atoms: CAR_6  and  CAW_7 
+REMARK    4  A    between atoms: CAI_9  and  CAQ_10 
+REMARK    5  A    between atoms: CAQ_10  and  CBC_11 
+REMARK    6  A    between atoms: CBB_12  and  OAU_14 
+REMARK    7  A    between atoms: CAZ_16  and  OAG_17 
+REMARK    8  A    between atoms: CBD_18  and  CAX_19 
+REMARK    9  A    between atoms: CBA_22  and  CAT_23 
+REMARK   10  A    between atoms: CAT_23  and  CAS_24 
+REMARK   11  A    between atoms: CAS_24  and  CAY_25 
+ROOT
+ATOM      1  CBC YFB d   1     -16.568  19.768 -10.080  0.00  0.00     0.013 A 
+ATOM      2  CBB YFB d   1     -17.864  20.267  -9.957  0.00  0.00     0.078 A 
+ATOM      3  CAO YFB d   1     -18.117  21.565  -9.523  0.00  0.00     0.045 A 
+ATOM      4  CAZ YFB d   1     -15.525  20.644  -9.726  0.00  0.00     0.092 A 
+ATOM      5  CBD YFB d   1     -15.764  21.955  -9.289  0.00  0.00     0.080 A 
+ATOM      6  CBA YFB d   1     -17.084  22.424  -9.181  0.00  0.00    -0.035 A 
+ENDROOT
+BRANCH   1   7
+ATOM      7  CAQ YFB d   1     -16.263  18.327 -10.567  0.00  0.00     0.072 C 
+BRANCH   7   8
+ATOM      8  CAI YFB d   1     -16.919  18.027 -11.775  0.00  0.00    -0.020 C 
+ATOM      9  CAW YFB d   1     -16.400  17.909 -13.074  0.00  0.00    -0.087 C 
+ATOM     10  CAD YFB d   1     -17.338  17.529 -14.249  0.00  0.00     0.043 C 
+BRANCH   9  11
+ATOM     11  CAR YFB d   1     -14.890  18.134 -13.351  0.00  0.00     0.037 C 
+BRANCH  11  12
+ATOM     12  CAP YFB d   1     -14.178  16.941 -14.005  0.00  0.00     0.031 C 
+BRANCH  12  13
+ATOM     13  CAH YFB d   1     -12.851  16.811 -13.560  0.00  0.00    -0.024 C 
+ATOM     14  CAV YFB d   1     -11.900  15.809 -13.843  0.00  0.00    -0.091 C 
+ATOM     15  CAB YFB d   1     -10.516  15.832 -13.188  0.00  0.00     0.042 C 
+ATOM     16  CAC YFB d   1     -12.146  14.673 -14.848  0.00  0.00     0.042 C 
+ENDBRANCH  12  13
+ENDBRANCH  11  12
+ENDBRANCH   9  11
+ENDBRANCH   7   8
+ENDBRANCH   1   7
+BRANCH   2  17
+ATOM     17  OAU YFB d   1     -18.923  19.483 -10.264  0.00  0.00    -0.355 OA
+ATOM     18  CAA YFB d   1     -19.824  19.447  -9.147  0.00  0.00     0.210 C 
+ENDBRANCH   2  17
+BRANCH   4  19
+ATOM     19  OAG YFB d   1     -14.229  20.209  -9.812  0.00  0.00    -0.359 OA
+ATOM     20  H22 YFB d   1     -13.643  20.907  -9.542  0.00  0.00     0.217 HD
+ENDBRANCH   4  19
+BRANCH   5  21
+ATOM     21  CAX YFB d   1     -14.546  22.855  -8.938  0.00  0.00     0.212 C 
+ATOM     22  OAF YFB d   1     -13.402  22.323  -8.946  0.00  0.00    -0.644 OA
+ATOM     23  OAE YFB d   1     -14.756  24.071  -8.685  0.00  0.00    -0.644 OA
+ENDBRANCH   5  21
+BRANCH   6  24
+ATOM     24  CAT YFB d   1     -17.521  23.818  -8.731  0.00  0.00     0.044 C 
+BRANCH  24  25
+ATOM     25  CAS YFB d   1     -17.752  23.866  -7.228  0.00  0.00     0.043 C 
+BRANCH  25  26
+ATOM     26  CAY YFB d   1     -17.922  25.311  -6.748  0.00  0.00    -0.058 A 
+ATOM     27  CAM YFB d   1     -18.948  26.110  -7.261  0.00  0.00     0.007 A 
+ATOM     28  CAK YFB d   1     -19.108  27.427  -6.826  0.00  0.00     0.001 A 
+ATOM     29  CAJ YFB d   1     -18.225  27.935  -5.868  0.00  0.00     0.000 A 
+ATOM     30  CAL YFB d   1     -17.200  27.137  -5.348  0.00  0.00     0.001 A 
+ATOM     31  CAN YFB d   1     -17.046  25.821  -5.790  0.00  0.00     0.007 A 
+ENDBRANCH  25  26
+ENDBRANCH  24  25
+ENDBRANCH   6  24
+TORSDOF 11
