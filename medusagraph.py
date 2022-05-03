@@ -11,6 +11,7 @@ from torch_geometric.data import DataLoader
 
 from dataset import PDBBindCoor, PDBBindNextStep2
 from model import Net_coor, Net_screen
+from molecular_optimization import get_refined_pose_file
 
 
 parser = argparse.ArgumentParser()
@@ -28,8 +29,8 @@ print(args)
 
 def convert_data(input_list, output_file, groundtruth_dir, pdbbind_dir, label_list_file):
 	cmd_str = f'python convert_data_to_disk.py --input_list={input_list} --output_file={output_file} --thread_num=1 '
-	cmd_str = cmd_str + '--use_new_data --bond_th=6 --pocket_th=12 --groundtruth_dir={groundtruth_dir} '
-	cmd_str = cmd_str + '--pdbbind_dir={pdbbind_dir} --label_list_file={label_list_file} --dataset=coor2 --pdb_version=2016'
+	cmd_str = cmd_str + f'--use_new_data --bond_th=6 --pocket_th=12 --groundtruth_dir={groundtruth_dir} '
+	cmd_str = cmd_str + f'--pdbbind_dir={pdbbind_dir} --label_list_file={label_list_file} --dataset=coor2 --pdb_version=2016'
 
 	os.system(cmd_str)
 	data_dir = os.path.join(label_list_file, output_file)
@@ -49,7 +50,7 @@ def generate_pose(data_dir, prediction_model, device):
 	output_poses = []
 	for data in test_loader:
 		out = model(data.x.to(device), data.edge_index.to(device), data.dist.to(device))[data.flexible_idx.bool()]
-		output_poses.append((data.x[data.flexible_idx.bool(), -3:] + out.cpu()).numpy()*100)
+		output_poses.append((data.x[data.flexible_idx.bool(), -3:] + out.detach().cpu()).numpy()*100)
 
 	return output_poses
 
@@ -65,8 +66,9 @@ def select_pose(data_dir, prediction_model, selection_model, output_poses, ligan
 
 	score = []
 	for data in test_loader:
+		data = data.to(device)
 		out = model(data.x, data.edge_index, data.dist, data.flexible_idx.bool(), data.batch)
-		out = out.cpu().numpy()[0, 1]
+		out = out.detach().cpu().numpy()[0, 1]
 		score.append(out)
 
 	max_idx = 0
@@ -76,7 +78,7 @@ def select_pose(data_dir, prediction_model, selection_model, output_poses, ligan
 			max_score = score[idx]
 			max_idx = idx
 
-    get_refined_pose_file(ligand_file, output_file, output_file[max_idx])
+	get_refined_pose_file(ligand_file, output_file, output_poses[max_idx])
 
 
 
@@ -100,8 +102,8 @@ if __name__ == "__main__":
 	device_str = 'cuda:' + gpu_id if torch.cuda.is_available() else 'cpu'
 	device = torch.device(device_str)
 
-    if not os.path.isdir(tmp_dir):
-        os.makedirs(tmp_dir)
+	if not os.path.isdir(tmp_dir):
+		os.makedirs(tmp_dir)
 	pdb_list_train = os.path.join(tmp_dir, 'pdb_list_train')
 	pdb_list_test = os.path.join(tmp_dir, 'pdb_list_test')
 	input_list = os.path.join(tmp_dir, 'pdb_list_')
@@ -111,14 +113,14 @@ if __name__ == "__main__":
 		os.system(f'mkdir -p {pdbbind_dir}')
 	label_list_file = tmp_dir
 
-	with open(pdb_list_train) as f:
+	with open(pdb_list_train, 'w') as f:
 		f.write('abcd\n')
-	with open(pdb_list_test) as f:
+	with open(pdb_list_test, 'w') as f:
 		f.write('abcd\n')
 
 	os.system(f'cp {ligand_file} {pdbbind_dir}/abcd.lig.mol2')
 	os.system(f'cp {protein_file} {pdbbind_dir}/abcd.rec.pdb')
-	os.system(f'cp {pose_file} {pose_file}/abcd.pdb')
+	os.system(f'cp {pose_file} {pdbbind_dir}/abcd.pdb')
 
 	data_dir = convert_data(input_list, 'pdbbind_rmsd_srand_coor2', groundtruth_dir, pdbbind_dir, label_list_file)
 	output_poses = generate_pose(data_dir, prediction_model, device)
