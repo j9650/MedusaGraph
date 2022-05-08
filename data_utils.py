@@ -108,13 +108,8 @@ def file_to_gt_pose(groundtruth_dir, groundtruth_suffix, pdb, Atoms, Bonds, pock
             if x == -1 or y == -1:
                 continue
 
-            # bond = ss[3]
-            # if (x <= len(ligand_gt) and y <= len(ligand_gt) and bond in Bonds):
-            # edge_gt[(x, y)] = 1
-            # edge_gt[(y, x)] = 1
             edge_gt.add((x, y))
             edge_gt.add((y, x))
-            #print(st)
     f.close()
 
     cx, cy, cz = centre_of_pocket(ligand_gt)
@@ -131,9 +126,6 @@ def file_to_gt_pose(groundtruth_dir, groundtruth_suffix, pdb, Atoms, Bonds, pock
     f.close()
     protein_gt = [line for line in protein_gt if line[5] in pocket_idx]
 
-    # print(len(protein_gt))
-    # print(pocket_idx)
-    # print([line[-1] for line in protein_gt])
     gt_pose = gen_3D_2_gt_pose(protein_gt, ligand_gt, Atoms, file_dir=None, use_protein=False)
     return gt_pose, protein_gt, ligand_gt, edge_gt
 
@@ -219,7 +211,6 @@ def gen_3D_2_pose(protein, ligand, Atoms, Bonds, bond_th, file_dir):
                     tot += 1
                     dist.append([dis, 0.0, 0.0])
                     # TODO: covalent bond
-                    # dist[-1][Bonds.index(covlent[(i, j)]) + 3] = 1
                 elif i >= ligand_nodes and j >= ligand_nodes:
                     edges.append(j)
                     tot += 1
@@ -305,7 +296,6 @@ def gen_3D_2_pose_atomwise(protein, ligand, Atoms, Bonds, edge_gt, bond_th, file
                         tot += 1
                         dist.append([dis, 0.0, 0.0])
                         # TODO: covalent bond
-                        # dist[-1][Bonds.index(covlent[(i, j)]) + 3] = 1
                 elif i >= ligand_nodes and j >= ligand_nodes:
                     if dis *SPACE < COV_BOND_TH:
                         edges.append(j)

@@ -16,11 +16,6 @@ import numpy as np
 from time import time 
 from tqdm import tqdm
 
-# from torch_geometric.datasets import PPI
-# path = '/export/local/mfr5226/datasets/pyg/ppi'
-# train_dataset = PPI(path, split='train')
-# test_dataset = PPI(path, split='test')
-
 from dataset import PDBBindCoor
 from model import loss_fn_kd, get_soft_label, loss_fn_dir, loss_fn_cos
 import plot
@@ -353,13 +348,10 @@ def test(loader, epoch):
 
         else: # not flexible
             out = model(data.x.to(device), data.edge_index.to(device), data.dist.to(device))
-            loss = loss_op(out, data.y.to(device)) # + loss_op_kld(out, data.y.to(device))
-
-            # rmsds = [torch.dist(data.y[i], out[i].cpu(), p=2).item() for i in range(num_atoms)]
+            loss = loss_op(out, data.y.to(device)) 
             rmsds = F.mse_loss(data.y[data.flexible_idx.bool()], out.cpu()[data.flexible_idx.bool()], reduction='sum').item()
             total_rmsd += math.sqrt(rmsds / num_flexible_atoms)
             all_rmsds.append(math.sqrt(rmsds / num_flexible_atoms))
-        # all_rmsds = all_rmsds + rmsds
 
 
         if (epoch <= 1):

@@ -34,11 +34,6 @@ def _pdb_file_to_pose(pdb, pdb_file, Atoms, Bonds, bond_th, protein_gt, tot, til
         ss = st.split()
         if (ss[0] == 'REMARK') and (ss[1] == 'POSE:'):
             continue
-            # if(flag_label == 0):
-            #     print(i,' ',global_tot)
-            #     flag_label = 1
-            # global_tot = global_tot + 1
-        # if (ss[0] == 'REMARK') and (ss[1] == 'E_total:'):
         if (ss[0] == 'REMARK') and (ss[1] == 'E_without_VDWR:'):
             this_pose_energy = float(ss[2])
             if this_pose_energy < min_energy:
@@ -50,10 +45,6 @@ def _pdb_file_to_pose(pdb, pdb_file, Atoms, Bonds, bond_th, protein_gt, tot, til
                 print(f"pose has {num_nodes} nodes while gt has {len(gt_pose)} nodes. protein_gt {pdb_file[-8:-4]},  {len(ligand_gt)}")
                 print(f"{len(protein_gt)} {len(ligand)} {len(gt_pose)}")
                 print([line[-1] for line in protein_gt])
-            # assert num_nodes == len(gt_pose)
-            # assert len(ligand) == len(ligand_gt)
-            # for i in range(len(ligand)):
-            #     assert ligand_gt[i][0] == ligand[i][0] or (len(ligand_gt[i][0]) > 3 and ligand_gt[i][0][:3] == ligand[i][0][:3]), f"in {pdb_file}, {ligand[i][0]} is not {ligand_gt[i][0]}"
 
             _write_gt_pose_to_file(output_dir+"/"+str(file_counter), len(ligand), gt_pose, edge_gt, pdb)
             ligand = []
@@ -67,8 +58,6 @@ def _pdb_file_to_pose(pdb, pdb_file, Atoms, Bonds, bond_th, protein_gt, tot, til
             name, x, y, z, atom = line_to_coor(st, 'ligand_pdb')
             if (atom != 'H'):
                 ligand.append((name, x, y, z, atom))
-            # if (atom == 'H') and (not name in H_type):
-            #     H_type.append(name)
 
     f.close()
 
@@ -87,9 +76,7 @@ def _count_atoms_types(pdbbind_dir, rec_list, Atoms):
     pbar = tqdm(total=len(rec_list))
     pbar.set_description('Counting Atoms type...')
     for line in rec_list:
-        #ligand_list = os.listdir(DUDE_dir+"/"+line+"/ac")
         f = open(pdbbind_dir+'/'+line,'r')
-        #print("/gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/medusa/output/"+line+".pdb")
         flag = 0
         for st in f:
             ss = st.split()
@@ -145,14 +132,9 @@ def read_pdbbind_to_disk_rmsd_energy_split(input_list,
         if '.pdb' not in line_pdb:
             line_pdb = line_pdb + '.pdb'
         rec_list.append(line_pdb)
-        #label_list.append(line.split()[1])
     f_list.close()
 
-    #Atoms = []
-    # Atoms = ['N', 'C', 'O', 'H', 'S', 'Br', 'Cl', 'P', 'F', 'I']
     Atoms = ['N', 'C', 'O', 'S', 'Br', 'Cl', 'P', 'F', 'I']
-    # Atoms = ['N', 'C', 'O']
-    # Atoms = Atoms + ['ALA', 'MET', 'ILE', 'GLN', 'LEU', 'THR', 'PRO', 'PHE', 'ARG', 'LYS', 'GLU', 'ASP', 'GLY', 'ASN', 'SER', 'VAL', 'TYR', 'HIS', 'CYS', 'TRP']
     Bonds = ['1', '2', 'ar', 'am']
     actives_n = []
     decoys_n = []
@@ -170,9 +152,6 @@ def read_pdbbind_to_disk_rmsd_energy_split(input_list,
 
     """
 
-
-    # tmp_data = np.zeros((tile_size, resolution, resolution, resolution, len(Atoms)))
-    # tmp_data = []
     G = nx.Graph()
     # tmp_feat = []
 

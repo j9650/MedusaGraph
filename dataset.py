@@ -13,15 +13,6 @@ from torch_geometric.data import InMemoryDataset, Data, DataLoader
 
 import time
 from model import Net_coor
-# https://github.com/rusty1s/pytorch_geometric/blob/462df68c04ae1e6782b5591928c20f3d506207a3/torch_geometric/datasets/zinc.py
-# https://github.com/rusty1s/pytorch_geometric/blob/68ca38e28c1b86cf267fab8499c5f3e52d8ec410/torch_geometric/datasets/ppi.py
-
-# parser = argparse.ArgumentParser()
-# parser.add_argument("--n_graph_layer", help="number of GNN layer", type=int, default = 1)
-# parser.add_argument("--d_graph_layer", help="number of GNN layer", type=int, default = 512)
-# parser.add_argument("--dropout_rate", help="dropout rate", type=float, default=0.3)
-# args = parser.parse_args()
-# print(args)
 
 SPACE = 100
 BOND_TH = 6.0

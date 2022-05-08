@@ -16,10 +16,6 @@ import numpy as np
 from time import time
 from tqdm import tqdm
 
-# from torch_geometric.datasets import PPI
-# path = '/export/local/mfr5226/datasets/pyg/ppi'
-# train_dataset = PPI(path, split='train')
-# test_dataset = PPI(path, split='test')
 
 from dataset import PDBBindCoor
 from model import loss_fn_kd, get_soft_label, loss_fn_dir, loss_fn_cos
@@ -67,11 +63,6 @@ parser.add_argument("--tot_seed", help="num of seeds in the dataset", type=int, 
 args = parser.parse_args()
 print(args)
 
-
-#path = '/export/local/mfr5226/datasets/pdb/sample/'
-
-# path = '/home/mdl/hzj5142/GNN/pdb-gnn/data/pdbbind/'
-# path = '/home/mdl/hzj5142/GNN/pdb-gnn/data/pdbbind_rmsd_srand4'
 path = args.data_path
 
 train_datasets = []
@@ -79,18 +70,12 @@ test_datasets = []
 train_loaders = []
 test_loaders = []
 
-# train_dataset=PDBBindCoor(root=path, split='train')
 test_dataset=PDBBindCoor(root=path, split='test', data_type='autodock')
-# train_loader=DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
 test_loader=DataLoader(test_dataset, batch_size=1)
 
 
-# train_loader_size = len(train_loader.dataset)
 test_dataset_size = len(test_dataset)
 test_loader_size = len(test_loader.dataset)
-
-# print(f"total {len(test_datasets)} subdatasets")
-# print(f"train_loader_size: {test_loader_size}")
 print(f"test_dataset_size: {test_dataset_size}, test_loader_size: {test_loader_size}")
 
 weight = 4.100135326385498 + args.weight_bias
@@ -115,7 +100,6 @@ device_str = 'cuda:' + gpu_id if torch.cuda.is_available() else 'cpu'
 
 device = torch.device(device_str)
 print('cuda' if torch.cuda.is_available() else 'cpu')
-# model = Net(train_datasets[0].num_features, train_datasets[0].num_classes, args).to(device)
 
 from model import Net_coor, Net_coor_res, Net_coor_dir, Net_coor_len, Net_coor_cent
 
@@ -133,10 +117,6 @@ elif args.model_type == 'Net_coor_cent':
 
 if args.pre_model != 'None':
     model = torch.load(args.pre_model).to(device)
-# loss_op = torch.nn.MSELoss()
-
-# model.double()
-# torch.set_default_dtype(torch.float64)
 
 if args.loss == 'L1Loss':
     loss_op = torch.nn.L1Loss(reduction=args.loss_reduction)
@@ -148,76 +128,11 @@ elif args.loss == 'CosineEmbeddingLoss':
 elif args.loss == 'CosineAngle':
     loss_op = loss_fn_cos(device, reduction=args.loss_reduction)
     loss_op2 = torch.nn.CosineEmbeddingLoss(reduction=args.loss_reduction)
-    # loss_op = torch.nn.CosineEmbeddingLoss(reduction='none')
     cos_target = torch.tensor([1]).to(device)
 if args.class_dir:
-    # loss_op = loss_fn_dir(device)
     loss_op = torch.nn.CrossEntropyLoss()
     assert args.model_type == 'Net_coor_dir'
-# loss_op_kld = torch.nn.KLDivLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
-
-
-def train():
-    model.train()
-
-    total_loss = 0
-    tot = 0
-    t = time()
-    for data in train_loader:
-        with torch.cuda.amp.autocast():
-            data = data.to(device)
-            # print(data.x.size(), data.y.size(), data.edge_index.size(), data.dist.size())
-            # print(type(data.flexible_idx.bool()))
-            # print(data.flexible_idx.bool())
-            # print(data.flexible_idx.bool().size(), data.x[data.flexible_idx.bool()].size())
-            # print(data.edge_index)
-            optimizer.zero_grad()
-            if args.flexible:
-                if args.model_type != 'Net_coor_cent':
-                    pred = model(data.x, data.edge_index, data.dist)[data.flexible_idx.bool()]
-                # length = pred.square().sum(1).sqrt()
-                # pred = pred.transpose(0,1).div(length).transpose(0, 1) * args.step_len
-                # print(pred.size())
-                if args.class_dir:
-                    y = data.y[data.flexible_idx.bool()].gt(0).long()
-                    y = y[:, 0] * 4 + y[:, 1] * 2 + y[:, 2]
-                    loss = loss_op(pred, y)
-                elif args.loss == 'CosineEmbeddingLoss':
-                    loss = loss_op(pred, data.y[data.flexible_idx.bool()], cos_target)
-                elif args.loss == 'CosineAngle':
-                    loss = loss_op(pred, data.y[data.flexible_idx.bool()])
-                    # loss = (1 - loss_op(pred, data.y[data.flexible_idx.bool()], cos_target)).acos().sum()
-                elif args.model_type == 'Net_coor_len':
-                    length = data.y[data.flexible_idx.bool()].square().sum(1).sqrt().reshape(pred.size()[0],1)
-                    loss = loss_op(pred, length)
-                elif args.model_type == 'Net_coor_cent':
-                    pred = model(data.x, data.edge_index, data.dist, data.batch, data.flexible_idx.bool())
-                    y = global_mean_pool(data.y[data.flexible_idx.bool()], data.batch[data.flexible_idx.bool()])
-                    loss = loss_op(pred, y)
-                else:
-                    # loss = loss_op(pred, data.y[data.flexible_idx.bool()]) # + loss_op_kld(pred, data.y[data.flexible_idx.bool()])
-                    loss = loss_op(pred, data.y)
-            else:
-                pred = model(data.x, data.edge_index, data.dist)
-                # print(pred.size())
-                loss = loss_op(pred, data.y) # + loss_op_kld(pred, data.y)
-            if args.loss == 'CosineEmbeddingLoss':
-                total_loss += loss.item() / pred.size()[0] * args.batch_size
-            if args.loss == 'CosineAngle':
-                total_loss += loss.item() / pred.size()[0] * args.batch_size
-            else:
-                total_loss += loss.item() * args.batch_size
-
-        loss.backward()
-        optimizer.step()
-        # optimizer.zero_grad()
-        tot += 1
-            # break
-    
-    print(f"trained {tot} batches, take {time() - t}s")
-    return total_loss / train_loader_size
-    # return total_loss / len(train_loader.dataset)
 
 
 @torch.no_grad()
@@ -251,9 +166,6 @@ def test(loader, epoch):
     diff_complexes = []
     rotamer_list = []
 
-    # rmsd_per_pdb = []
-    # num_pose_per_pdb = []
-    # rmsd_per_pdb_in = []
     rmsd_per_pdb = {}
     num_pose_per_pdb = {}
     rmsd_per_pdb_in = {}
@@ -269,25 +181,12 @@ def test(loader, epoch):
     pbar = tqdm(total=test_loader_size)
     pbar.set_description('Testing poses...')
     for data in loader:
-        # with torch.cuda.amp.autocast():
         num_atoms = data.x.size()[0]
         num_flexible_atoms = data.x[data.flexible_idx.bool()].size()[0]
 
-        # if num_atoms != all_atoms or num_flexible_atoms != ligand_atoms:
-        '''
-        if data.pdb != pdb:
-            diff_complex += 1
-            all_atoms = num_atoms
-            ligand_atoms = num_flexible_atoms
-            rmsd_per_pdb.append(0.0)
-            rmsd_per_pdb_in.append(0.0)
-            num_pose_per_pdb.append(0)
-            pdb = data.pdb[0]
-            # diff_complexes.append((all_atoms, ligand_atoms))
-        '''
+
         pdb = str(data.pdb[0])
-        # print(pdb)
-        # print(str(pdb))
+
         if pdb not in rmsd_per_pdb:
             diff_complex += 1
             all_atoms = num_atoms
@@ -310,11 +209,9 @@ def test(loader, epoch):
         if data.x.size()[0] != num_atoms:
             print(f"num_flexible_atoms: {num_flexible_atoms}, data.x.size: {data.x.size()[0]}, data.y.size: {num_atoms}")
         if args.flexible:
-            # print(data.flexible_idx.bool().size())
             if args.model_type != 'Net_coor_cent':
                 out = model(data.x.to(device), data.edge_index.to(device), data.dist.to(device))[data.flexible_idx.bool()]
-            # length = out.square().sum(1).sqrt()
-            # out = out.transpose(0,1).div(length).transpose(0, 1) * args.step_len
+
             if args.class_dir:
                 y = data.y[data.flexible_idx.bool()].gt(0).long().to(device)
                 y = y[:, 0] * 4 + y[:, 1] * 2 + y[:, 2]
@@ -322,17 +219,12 @@ def test(loader, epoch):
                 for i in range(8):
                     fpl[i] += y.eq(i).sum().cpu().item()
 
-                # fp += y.eq(0).sum().cpu().item()
-                # fn += y.eq(1).sum().cpu().item()
-                # tp += y.eq(2).sum().cpu().item()
                 tn += y.size()[0]
                 out = _dir_2_coor(out, args.step_len)
             elif args.loss == 'CosineEmbeddingLoss':
                 loss = loss_op(out, data.y.to(device)[data.flexible_idx.bool()], cos_target)
             elif args.loss == 'CosineAngle':
-                # loss = loss_op(out, data.y.to(device)[data.flexible_idx.bool()])
                 loss = (1 - loss_op2(out, data.y.to(device)[data.flexible_idx.bool()], cos_target)).acos().sum()
-                # loss = (1 - loss_op(out, data.y.to(device)[data.flexible_idx.bool()], cos_target)).acos().sum()
             elif args.model_type == 'Net_coor_len':
                 length = data.y.to(device)[data.flexible_idx.bool()].square().sum(1).sqrt().reshape(out.size()[0],1)
                 loss = loss_op(out, length)
@@ -343,95 +235,28 @@ def test(loader, epoch):
                 loss = loss_op(pred, y)
                 out = pred.repeat(num_flexible_atoms, 1)
             else:
-                # loss = loss_op(out, data.y.to(device)[data.flexible_idx.bool()]) # + loss_op_kld(out, data.y.to(device)[data.flexible_idx.bool()])
-                loss = loss_op(out, data.y.to(device)) # + loss_op_kld(out, data.y.to(device)[data.flexible_idx.bool()])
-            # print(f"flexible nodes: {num_atoms}, all nodes: {data.flexible_idx.bool().size()[0]}")
-            # rmsds = [torch.dist(data.y[i], out[i].cpu(), p=2).item() for i in range(num_atoms)]
+                loss = loss_op(out, data.y.to(device))
             
-            # rmsds = F.mse_loss(data.y[data.flexible_idx.bool()], out.cpu(), reduction='sum').item()
             this_rmsd = (F.mse_loss(data.y.to(device), out, reduction='sum') / num_flexible_atoms).sqrt().cpu().item()
             total_rmsd += this_rmsd
             all_rmsds.append(this_rmsd)
 
-            # num_pose_per_pdb[-1] += 1
-            # rmsd_per_pdb[-1] += this_rmsd
             num_pose_per_pdb[pdb] += 1
             rmsd_per_pdb[pdb] += this_rmsd
             if this_rmsd < best_rmsd_per_pdb[pdb]:
                 best_rmsd_per_pdb[pdb] = this_rmsd
 
-            '''
-            std_x = torch.square(torch.std(out[:, 0])).cpu().item()
-            std_y = torch.square(torch.std(out[:, 1])).cpu().item()
-            std_z = torch.square(torch.std(out[:, 2])).cpu().item()
-            y = data.y[data.flexible_idx.bool()]
-            std_y_x = torch.square(torch.std(y[:, 0])).cpu().item()
-            std_y_y = torch.square(torch.std(y[:, 1])).cpu().item()
-            std_y_z = torch.square(torch.std(y[:, 2])).cpu().item()
-            if std_x + std_y + std_z > (std_y_x + std_y_y + std_y_z) * 0.9:
-                gstd += 1
-            '''
-            if args.iterative > 0 and epoch > 3:
-                data_x = data.x.to(device)
-                data_y = data.y[data.flexible_idx.bool()].to(device)
-                data_x[data.flexible_idx.bool(), -3:] += out
-                avg_out = out
-                dist = data.dist.numpy()
-                edge_index = data.edge_index.numpy()
-                l1 = (data.flexible_idx[data.edge_index[0]]==1).nonzero(as_tuple=True)[0]
-                l2 = (data.flexible_idx[data.edge_index[1]]==1).nonzero(as_tuple=True)[0]
-                idx = torch.cat((l1, l2), 0).unique().numpy()
-                x=data_x.cpu().numpy()
-                for i in idx:
-                    a = edge_index[0][i]
-                    b = edge_index[1][i]
-
-                    dis = distance.euclidean(x[a, -3:], x[b, -3:])
-                    dis = round(dis*100000) / 100000
-                    for t in range(3):
-                        if data.dist[i, t] != 0:
-                            data.dist[i, t] = dis
-                dist = torch.Tensor(dist).to(device)
-                for ii in range(args.iterative):
-                    out1 = model(data_x, data.edge_index.to(device), dist)[data.flexible_idx.bool()]
-                    out += out1
-                    rmsds = F.mse_loss(data_y, out, reduction='sum').item()
-                    total_rmsds[ii] += math.sqrt(rmsds / num_flexible_atoms)
-
-                    data_x[data.flexible_idx.bool(), -3:] += out1
-                    avg_out += out
-                    if ii < args.iterative - 1:
-                        dist = data.dist.numpy()
-                        x=data_x.cpu().numpy()
-                        for i in idx:
-                            a = edge_index[0][i]
-                            b = edge_index[1][i]
-                            dis = distance.euclidean(x[a, -3:], x[b, -3:])
-                            dis = round(dis*100000) / 100000
-                            for t in range(3):
-                                if data.dist[i, t] != 0:
-                                    data.dist[i, t] = dis
-                        dist = torch.Tensor(dist).to(device)
-                avg_out = avg_out / (args.iterative + 1)
-                rmsds = F.mse_loss(data_y, avg_out, reduction='sum').item()
-                avg_rmsd += math.sqrt(rmsds / num_flexible_atoms)
-
-
         else: # not flexible
             out = model(data.x.to(device), data.edge_index.to(device), data.dist.to(device))
-            loss = loss_op(out, data.y.to(device)) # + loss_op_kld(out, data.y.to(device))
+            loss = loss_op(out, data.y.to(device))
 
-            # rmsds = [torch.dist(data.y[i], out[i].cpu(), p=2).item() for i in range(num_atoms)]
             rmsds = F.mse_loss(data.y[data.flexible_idx.bool()], out.cpu()[data.flexible_idx.bool()], reduction='sum').item()
             total_rmsd += math.sqrt(rmsds / num_flexible_atoms)
             all_rmsds.append(math.sqrt(rmsds / num_flexible_atoms))
-        # all_rmsds = all_rmsds + rmsds
 
 
         if (epoch <= 1):
             if args.flexible:
-                # rmsds = F.mse_loss(data.y[data.flexible_idx.bool()], data.x[data.flexible_idx.bool()][:, -3:], reduction='sum').item()
-                # rmsds = torch.sum(torch.square(data.y[data.flexible_idx.bool()])).item()
                 rmsds = math.sqrt(torch.sum(torch.square(data.y)).item() / num_flexible_atoms)
                 total_rmsd_in += rmsds
                 all_rmsds_in.append(rmsds)
@@ -440,28 +265,10 @@ def test(loader, epoch):
                     good_pose_in += 1
                 if this_rmsd < args.th:
                     good_pose += 1
-                # rmsd_per_pdb_in[-1] += rmsds
                 rmsd_per_pdb_in[pdb] += rmsds
                 if rmsds < best_rmsd_per_pdb_in[pdb]:
                     best_rmsd_per_pdb_in[pdb] = rmsds
 
-                '''
-                with open('all_pose_rmsd_init', 'a') as f:
-                    f.write(str(rmsds)+'\n')
-                '''
-                if this_rmsd < rmsds and this_rmsd < args.th:
-                    print(pdb)
-                    print((data.x[data.flexible_idx.bool(), -3:] + out.cpu()).numpy()*100)
-                    mol2_file = f'/gpfs/group/mtk2/cyberstar/hzj5142/AtomNet/pdbbind/{pdb}/{pdb}.lig.mol2'
-                    get_refined_pose_file(mol2_file, f'opt/{pdb}.lig.mol2', (data.x[data.flexible_idx.bool(), -3:] + out.cpu()).numpy()*100)
-                    # break
-                # if this_rmsd < rmsds and rmsds < 0.02:
-                #     # print(torch.cat((data.x[data.flexible_idx.bool(), -3:] + out.cpu(), data.y), 1))
-                #     print((data.x[data.flexible_idx.bool(), -3:] + out.cpu()).numpy()*100)
-                #     print(f'diff_complex: {diff_complex}')
-                #     break
-                # else:
-                    # print(this_rmsd, rmsds)
             else:
                 rmsds = F.mse_loss(data.y, data.x[:, -3:], reduction='sum').item()
                 total_rmsd_in += math.sqrt(rmsds / num_atoms)
@@ -475,30 +282,10 @@ def test(loader, epoch):
         else:
             total_loss += loss.item() # * args.batch_size
 
-        '''
-        if pose_idx <= 0:
-            # print(torch.cat((data.x[data.flexible_idx.bool(), -3:], out.cpu(), data.y[data.flexible_idx.bool()]), 1))
-            print(torch.cat((data.x[data.flexible_idx.bool(), -3:], out.cpu(), data.y), 1))
-        '''
         pose_idx += 1
         pbar.update(1)
         if args.pose_limit > 0 and pose_idx >= args.pose_limit:
             break
-
-    '''
-    assert diff_complex % args.tot_seed == 0
-    diff_complex = diff_complex // args.tot_seed
-    print(f'diff_complex {diff_complex}')
-    for ii in range(1, args.tot_seed):
-        for jj in range(diff_complex):
-            num_pose_per_pdb[jj] += num_pose_per_pdb[ii * diff_complex + jj]
-            rmsd_per_pdb[jj] += rmsd_per_pdb[ii * diff_complex + jj]
-            rmsd_per_pdb_in[jj] += rmsd_per_pdb_in[ii * diff_complex + jj]
-    '''
-
-
-    # avg_rmsd_per_pdb = sum([r / d for r, d in zip(rmsd_per_pdb[:diff_complex], num_pose_per_pdb[:diff_complex])]) / diff_complex
-    # avg_rmsd_per_pdb_in = sum([r / d for r, d in zip(rmsd_per_pdb_in[:diff_complex], num_pose_per_pdb[:diff_complex])]) / diff_complex
 
     pdb_key = [k for k in rmsd_per_pdb]
     assert diff_complex == len(pdb_key)
@@ -517,23 +304,8 @@ def test(loader, epoch):
     std_all_in = np.std(all_rmsds_in)*100
     std_all = np.std(all_rmsds)*100
     print(f'std: {std_all_in} {std_all}')
-    '''
-    print(f'diff_complex: {diff_complex}')
-    for ii in range(751):
-        for jj in range(1, 8):
-            assert diff_complexes[ii] == diff_complexes[ii + jj * 751]
-    ii = 0
-    with open('output_ligand_fingerprint.txt', 'r') as f:
-        ii = 0
-        for line in f:
-            l_a = len(line.split()[1])
-            assert l_a == diff_complexes[ii][1]
-            ii += 1
-    print(ii)
-    '''
-    # print(f"Spend {tt}s, {gstd} poses has greater std, total {pose_idx} poses")
+
     print(f"Spend {tt}s")
-    # print(f"x: {fp}, y: {fn}, z: {tp}, all: {tn}")
     print(f"x: {fpl}, all: {tn}")
     print([i / pose_idx for i in total_rmsds])
     print(avg_rmsd / pose_idx)
@@ -545,7 +317,6 @@ def test(loader, epoch):
             elif args.max_rotamer != 0:
                 f.write(f'{args.max_rotamer} {total_rmsd_in / pose_idx} {total_rmsd / pose_idx} {pose_idx} {good_pose_in} {good_pose} {rmsd_decreased} {std_all_in} {std_all}\n')
     return total_loss / pose_idx, avg_rmsd_per_pdb * 100, avg_rmsd_per_pdb_in * 100
-    # return total_loss / pose_idx, total_rmsd / pose_idx, total_rmsd_in / pose_idx
 
 
 if not os.path.isdir(args.model_dir):
