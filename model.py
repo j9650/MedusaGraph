@@ -543,10 +543,6 @@ class Net_coor_dir(torch.nn.Module):
         x = self.linl2(x)
         if self.class_dir:
             x = F.log_softmax(x, dim=1)
-            # a = F.softmax(x[:, :2], dim=1)
-            # b= F.softmax(x[:, 2:4], dim=1)
-            # c = F.softmax(x[:, 4:6], dim=1)
-            # x = torch.cat([a, b, c], 1)
         return x
 
 
@@ -670,13 +666,6 @@ class Net_coor_res(torch.nn.Module):
         self.Dropout = torch.nn.Dropout(p=args.dropout_rate)
 
     def forward(self, x, edge_index, edge_attr):
-        # x = self.conv1(x, edge_index, edge_attr)
-        # x = self.ln1(x)
-        # if self.heads > 0:
-        #     x = self.lin1(x)
-        # # x = self.conv1(x)
-        # x = self.relu(x)
-        # x = self.Dropout(x)
         x = self.elu(self.lin0(x))
 
         for i in range(len(self.convs)):
