@@ -18,5 +18,5 @@ python train_coor.py --gpu_id=0 --n_graph_layer=4 --d_graph_layer=256 --start_ep
 # Prepaire the data for training the pose selection model:
 python test.py --path=MedusaGraph_tmp/pdbbind_rmsd_srand_coor2_2 --pre_root=MedusaGraph_tmp/pdbbind_rmssrand_coor2 --model_dir=models/prediction_model.pt --dataset=PDBBindNextStep2 --gpu_id=0
 
-#Train the pose selection model:
+# Train the pose selection model:
 python train_select.py --model_type=Net_screen --epoch=50 --gpu_id=0 --data_path=MedusaGraph_tmp/pdbbind_rmsd_srand_coor2_2/ --n_graph_layer=2 --d_graph_layer=256 --n_FC_layer=2 --d_FC_layer=256 --output=MedusaGraph_tmp/models_4_256_atom_hinge0_2/out --model_dir=MedusaGraph_tmp/models_4_256_atom_hinge0_2 --loss=CrossEntropyLoss --loss_reduction=mean --flexible --weight_bias=-9.0 --th=0.03
