@@ -112,7 +112,7 @@ def get_refined_pose_file(mol2_file, output_mol2_file, ligand):
 					y = ligand[nonH_atom - 1][1]
 					z = ligand[nonH_atom - 1][2]
 					st = _set_num(nonH_atom, 7) + line[7:16] + _set_coord(x, 10) + _set_coord(y, 10) + _set_coord(z, 10) + line[46:]
-					lines.append(lst)
+					lines.append(st)
 					nonH_atom += 1
 				atom_id += 1
 				continue
